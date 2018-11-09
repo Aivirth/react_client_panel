@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Clients extends Component {
   render() {
@@ -44,7 +45,14 @@ class Clients extends Component {
                   </td>
                   <td>{client.email}</td>
                   <td>{client.balance}</td>
-                  <td />
+                  <td>
+                    <Link
+                      className="btn btn-secondary btn-sm"
+                      to={`/client/${client.id}`}
+                    >
+                      <i className="fa fa-arrow-circle-right" /> Details{" "}
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
