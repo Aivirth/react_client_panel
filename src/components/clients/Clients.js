@@ -4,12 +4,13 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import PropTypes from "prop-types";
+import Spinner from "../layout/Spinner";
 
 class Clients extends Component {
   render() {
     const { clients } = this.props;
 
-    let output = <h1>Loading</h1>;
+    let output = <Spinner />;
 
     if (clients) {
       output = (
