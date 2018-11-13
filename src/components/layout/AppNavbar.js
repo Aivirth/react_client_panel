@@ -35,14 +35,16 @@ class AppNavbar extends Component {
           <Link to="/" className="navbar-brand">
             ClientPanel
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarMain"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
+          {isAuthenticated ? (
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarMain"
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+          ) : null}
           <div className="collapse navbar-collapse" id="navbarMain">
             {isAuthenticated ? (
               <ul className="navbar-nav mr-auto">
