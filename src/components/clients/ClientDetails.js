@@ -8,8 +8,51 @@ import Spinner from "../layout/Spinner";
 import classnames from "classnames";
 
 class ClientDetails extends Component {
+  state = {
+    showBalanceUpdate: false,
+    balanceUpdateAmount: ""
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  balanceSubmit = e => {
+    e.preventDefault();
+    const { client, firestore } = this.props;
+    const { balanceUpdateAmount } = this.state;
+
+    const clientUpdate = {
+      balance: parseFloat(balanceUpdateAmount)
+    };
+
+    firestore.update({ collection: "clients", doc: client.id }, clientUpdate);
+  };
+
   render() {
     let { client } = this.props;
+
+    const { showBalanceUpdate, balanceUpdateAmount } = this.state;
+
+    const balanceForm = (
+      <form onSubmit={this.balanceSubmit}>
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            name="balanceUpdateAmount"
+            placeholder="Add New Balance"
+            value={balanceUpdateAmount}
+            onChange={this.onChange}
+          />
+          <div className="input-group-append">
+            <input
+              type="submit"
+              value="Update"
+              className="btn btn-outline-dark"
+            />
+          </div>
+        </div>
+      </form>
+    );
 
     if (client) {
       return (
@@ -53,8 +96,21 @@ class ClientDetails extends Component {
                     >
                       €{parseFloat(client.balance).toFixed(2)}
                     </span>
+                    <small>
+                      <a
+                        // eslint-disable-next-line
+                        href="javascript:void(0)"
+                        onClick={() =>
+                          this.setState({
+                            showBalanceUpdate: !this.state.showBalanceUpdate
+                          })
+                        }
+                      >
+                        <i className="fas fa-pencil-alt" />
+                      </a>
+                    </small>
                   </h3>
-                  {/* todo: form */}
+                  {showBalanceUpdate ? balanceForm : null}
                 </div>
               </div>
               <hr />
