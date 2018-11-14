@@ -35,6 +35,7 @@ class AppNavbar extends Component {
           <Link to="/" className="navbar-brand">
             ClientPanel
           </Link>
+
           {isAuthenticated ? (
             <button
               className="navbar-toggler"
@@ -45,12 +46,16 @@ class AppNavbar extends Component {
               <span className="navbar-toggler-icon" />
             </button>
           ) : null}
+
           <div className="collapse navbar-collapse" id="navbarMain">
             {isAuthenticated ? (
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
                   <Link to="/" className="nav-link">
                     Dashboard
+                  </Link>
+                  <Link to="/settings" className="nav-link">
+                    Settings
                   </Link>
                 </li>
               </ul>
