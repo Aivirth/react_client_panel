@@ -12,6 +12,7 @@ import store from "./store";
 import { UserIsAuthenticated, UserIsNotAuthenticated } from "./helpers/auth";
 
 import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 class App extends Component {
   render() {
@@ -44,13 +45,18 @@ class App extends Component {
                 />
                 <Route
                   exact
+                  path="/settings"
+                  component={UserIsAuthenticated(Settings)}
+                />
+                <Route
+                  exact
                   path="/login"
                   component={UserIsNotAuthenticated(Login)}
                 />
                 <Route
                   exact
-                  path="/settings"
-                  component={UserIsAuthenticated(Settings)}
+                  path="/register"
+                  component={UserIsNotAuthenticated(Register)}
                 />
               </Switch>
             </div>
